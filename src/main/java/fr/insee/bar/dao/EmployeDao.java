@@ -50,8 +50,8 @@ public class EmployeDao {
 
 	public Optional<Employe> find(Short id) {
 		try {
-			Employe salarie = template.queryForObject(SQL_FIND, ImmutableMap.of("id", id), rowMapper);
-			return Optional.of(salarie);
+			Employe employe = template.queryForObject(SQL_FIND, ImmutableMap.of("id", id), rowMapper);
+			return Optional.of(employe);
 
 		}
 		catch (EmptyResultDataAccessException e) {
@@ -71,11 +71,11 @@ public class EmployeDao {
 			Role role = new Role();
 			role.setId(rs.getShort("rid"));
 			role.setLibelle(rs.getString("libelle"));
-			Employe salarie = new Employe();
-			salarie.setId(rs.getShort("eid"));
-			salarie.setNom(rs.getString("nom"));
-			salarie.setRole(role);
-			return salarie;
+			Employe employe = new Employe();
+			employe.setId(rs.getShort("eid"));
+			employe.setNom(rs.getString("nom"));
+			employe.setRole(role);
+			return employe;
 		}
 
 	}
