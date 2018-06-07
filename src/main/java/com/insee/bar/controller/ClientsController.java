@@ -1,4 +1,4 @@
-package fr.insee.bar.controller;
+package com.insee.bar.controller;
 
 import java.util.List;
 

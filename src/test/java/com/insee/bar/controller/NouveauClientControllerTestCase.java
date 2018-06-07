@@ -1,4 +1,4 @@
-package fr.insee.bar.controller;
+package com.insee.bar.controller;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -18,6 +18,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Errors;
+
+import com.insee.bar.controller.NouveauClientController;
 
 import fr.insee.bar.dao.ClientDao;
 import fr.insee.bar.model.Client;
