@@ -30,6 +30,7 @@ public class NouveauClientController {
 	@Autowired
 	private EmployeService employeService;
 
+	// Commentaire
 	@GetMapping("/nouveau")
 	public String nouveauClient(Salarie salarie, Model model) throws BarDroitException {
 		employeService.verifierResponsable(salarie);
