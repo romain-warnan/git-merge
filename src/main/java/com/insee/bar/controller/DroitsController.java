@@ -1,17 +1,17 @@
-package fr.insee.bar.controller;
+package com.insee.bar.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import fr.insee.bar.model.Client;
+import fr.insee.bar.model.Personne;
 
 @Controller
 public class DroitsController {
 
 	@GetMapping("/us142")
 	public String us142() {
-		Client client = new Client();
-		client.setEmail("us142@email.com");
+		Personne personne = new Personne();
+		personne.setEmail("us142@email.com");
 		return "us142";
 	}
 }
