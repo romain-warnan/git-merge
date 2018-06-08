@@ -32,14 +32,18 @@ public class NouveauClientController {
 
 	// Commentaire
 	@GetMapping("/nouveau")
-   public String nouveauClient(Employe employe, Model model) throws BarDroitException {
-      employeService.verifierResponsable(employe);
+	public String nouveauClient(Employe employe, Model model) throws BarDroitException {
+		employeService.verifierResponsable(employe);
 		model.addAttribute("client", new Personne());
 		return "nouveau-client";
 	}
 
 	@PostMapping("/nouveau")
-	public String nouveauClientPost(@Valid Personne personne, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+	public String nouveauClientPost(
+		@Valid Personne personne,
+		BindingResult result,
+		Model model,
+		RedirectAttributes redirectAttributes) {
 		clientValidator.validate(personne, result);
 		if (result.hasErrors()) {
 			model.addAttribute("client", personne);
