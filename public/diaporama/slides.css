@@ -1,3 +1,13 @@
+/*
+#42730b : vert
+#ef4e32 : rouge
+#088a8a : bleu
+*/
+
+body {
+	background-color: #ffc;
+}
+
 .reveal .main-title {
     /* Empty */
 }
@@ -9,7 +19,6 @@
 .reveal .center {
     text-align: center;
 }
-
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -20,7 +29,7 @@
 }
 
 .reveal h3 {
-	color: #f05033;
+	color: #ef4e32;
 }
 
 .reveal .chapter h2 {
@@ -98,11 +107,11 @@
 
 .reveal ul li {
     font-size: 80%;
-    color: #1a53a1;
+    color: #42730b;
 }
 
 .reveal li li {
-    color: #657b83;
+    color: #088a8a;
 }
 
 .reveal .small {
