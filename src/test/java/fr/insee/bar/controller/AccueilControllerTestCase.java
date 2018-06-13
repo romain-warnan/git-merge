@@ -1,4 +1,4 @@
-package com.insee.bar.controller;
+package fr.insee.bar.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.insee.bar.controller.AccueilController;
+import fr.insee.bar.controller.AccueilController;
 
 public class AccueilControllerTestCase {
 

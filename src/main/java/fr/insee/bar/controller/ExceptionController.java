@@ -1,4 +1,4 @@
-package com.insee.bar.controller;
+package fr.insee.bar.controller;
 
 import fr.insee.bar.exception.BarAjaxException;
 import fr.insee.bar.exception.BarCommandeException;

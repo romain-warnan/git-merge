@@ -1,4 +1,4 @@
-package com.insee.bar.controller;
+package fr.insee.bar.controller;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package com.insee.bar.controller;
+package fr.insee.bar.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

@@ -1,4 +1,4 @@
-package com.insee.bar.controller;
+package fr.insee.bar.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

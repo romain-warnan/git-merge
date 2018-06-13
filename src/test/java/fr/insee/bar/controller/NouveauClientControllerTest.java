@@ -1,8 +1,6 @@
-package com.insee.bar.controller;
+package fr.insee.bar.controller;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -12,51 +10,45 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.validation.Errors;
+import org.springframework.web.context.WebApplicationContext;
 
-import com.insee.bar.controller.NouveauClientController;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:applicationContext.xml", "classpath:dispatcher-servlet.xml" })
+@ActiveProfiles("serveur")
+@WebAppConfiguration
+public class NouveauClientControllerTest {
 
-import fr.insee.bar.dao.ClientDao;
-import fr.insee.bar.model.Personne;
-import fr.insee.bar.service.EmployeService;
-import fr.insee.bar.validator.ClientValidator;
-
-public class NouveauClientControllerTestCase {
-
-	@Mock
-	private ClientDao clientDao;
-
-	@Mock
-	private ClientValidator clientValidator;
-
-	@Mock
-	private EmployeService employeService;
-
-	@InjectMocks
-	private NouveauClientController nouveauClientController;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
 	private MockMvc mockMvc;
 
 	@Before
-	public void setup() {
-		MockitoAnnotations.initMocks(this);
+	public void before() {
 		this.mockMvc = MockMvcBuilders
-			.standaloneSetup(nouveauClientController)
+			.webAppContextSetup(this.webApplicationContext)
 			.build();
 	}
 
 	@Test
+	public void nouveauClientServeur() throws Exception {
+		this.mockMvc
+			.perform(get("/client/nouveau"))
+			.andExpect(model().attributeDoesNotExist("client"))
+			.andExpect(status().isForbidden())
+			.andExpect(view().name("exception"));
+	}
+
+	@Test
 	public void nouveauClientPostSuccess() throws Exception {
-		doNothing()
-			.when(clientValidator)
-			.validate(any(Personne.class), any(Errors.class));
-		when(clientDao.insert(any(Personne.class)))
-			.thenReturn(null);
 		this.mockMvc
 			.perform(post("/client/nouveau")
 				.param("nom", "Pr�nom Nom")
@@ -71,11 +63,6 @@ public class NouveauClientControllerTestCase {
 
 	@Test
 	public void nouveauClientPostError() throws Exception {
-		doNothing()
-			.when(clientValidator)
-			.validate(any(Personne.class), any(Errors.class));
-		when(clientDao.insert(any(Personne.class)))
-			.thenReturn(null);
 		this.mockMvc
 			.perform(post("/client/nouveau")
 				.param("nom", "Pr�nom Nom")
