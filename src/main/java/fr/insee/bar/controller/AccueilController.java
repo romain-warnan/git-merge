@@ -15,6 +15,7 @@ public class AccueilController {
 	@Value("${name}")
 	private String name;
 
+	// TODO : mettre une redirection temporaire
 	@GetMapping("/")
 	@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
 	public String welcome() {
@@ -23,11 +24,7 @@ public class AccueilController {
 
 	@GetMapping("/accueil")
 	public String hello(Model model) {
-		model.addAttribute("message", this.message());
+		model.addAttribute("message", name);
 		return "accueil";
-	}
-
-	private String message() {
-		return name;
 	}
 }
