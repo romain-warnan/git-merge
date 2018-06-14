@@ -17,7 +17,7 @@ public class AccueilController {
 
 	// TODO : mettre une redirection temporaire
 	@GetMapping("/")
-	@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+	@ResponseStatus(HttpStatus.TEMPORARY_REDIRECT)
 	public String welcome() {
 		return "redirect:/accueil";
 	}
