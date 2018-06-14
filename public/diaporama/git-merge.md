@@ -19,6 +19,22 @@ Les techniques présentées ici sont valables dans les trois cas
 
 
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Généralités
+
+La fusion est toujours locale
+ - aucun risque de casser quoique ce soit
+
+On peut toujours annuler l'opération
+ - `git merge --abort`
+ - `git rebase --abort`
+
+Il est toujours préférable d'avoir une copie de travail propre
+ - valider : `git commit`
+ - ou remiser : `git stash`
+
+===
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Une image
 <div class="center">
     <img src="git-logo.png" class="boxed-img" />

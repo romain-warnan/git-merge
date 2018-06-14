@@ -28,6 +28,10 @@ body {
     text-transform: none;
 }
 
+.reveal h1 {
+	color: #434a4b;
+}
+
 .reveal h3 {
 	color: #ef4e32;
 }
@@ -45,6 +49,7 @@ body {
 }
 
 .reveal p {
+	color: #434a4b;
 	margin: 20px 0 0 0;
 }
 
@@ -102,7 +107,7 @@ body {
 }
 
 .reveal ul li:before {
-    content: '–';
+    /* content: '–'; */
     margin-right: 7px;
 }
 
@@ -116,6 +121,7 @@ body {
 }
 
 .reveal .small {
+	color: #434a4b;
     font-size: 0.7em;
 }
 
