@@ -173,7 +173,38 @@ Après *commit*
 %%%
 
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
-### Une image
+### Exemple complet
+
+Explications :
+ - dans une branche `bex3`, on a renommé une classe du modèle
+  - `Employe` &rarr; `Agent`
+  - beaucoup de fichiers sont donc modifiés
+ - on aussi supprimé une classe inutile
+  - `DroitsController`
+ - et ajouté de la Javadoc
+ - dans `master` on renommé une autre classe du modèle
+  - `Personne` &rarr; `Client`
+ 
 <div class="center">
-    <img src="images/git-logo.png" class="boxed-img" />
+    <img src="images/graph.png" class="boxed-img" />
 </div>
+
+On veut fusionner `bex3` dans `master`
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Étapes
+
+```bash
+git reset --hard ex3b
+```
+
+ - on fait la fusion dans Eclipse
+ - `git diff`
+ - on résoud le problème de la classe supprimée
+ - on résoud les conflits dans les deux contrôleurs
+ - `git log --oneline --left-right --merge`
+ - on lance l'application
+ - *commit*
+ - `git log --cc -p -1`
