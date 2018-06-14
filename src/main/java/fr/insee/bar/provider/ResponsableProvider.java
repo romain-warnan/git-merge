@@ -14,6 +14,9 @@ public class ResponsableProvider implements EmployeProvider {
 	@Autowired
 	private EmployeDao employeDao;
 
+	/**
+	 * Retourne un agent dont le rôle est "responsable"
+	 * */
 	@Override
 	public Agent provide() {
 		return employeDao.find(Short.valueOf("3")).get();
