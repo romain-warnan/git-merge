@@ -153,6 +153,8 @@ Voir les parties du code contenant des conflits :
 
 Avant *commit*
  - `git diff` ne doit plus rien afficher
+ - compiler et lancer l'application
+ - exécuter les tests
 
 Après *commit*
  - `git log --cc -p -1` permet d'afficher le patch de la résolution 
