@@ -14,9 +14,7 @@ Les techniques présentées ici sont valables dans les trois cas
   - `git fetch`
   - `git merge origin/master` 
 
-
-===
-
+%%%
 
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Généralités
@@ -32,16 +30,15 @@ Il est toujours préférable d'avoir une copie de travail propre
  - valider : `git commit`
  - ou remiser : `git stash`
 
-
-===
-
+%%%
 
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Conflits de fusion
 
 La __même ligne__ du __même fichier__ a été modifée différemment  
 
-Sans conflit :
+ - Sans conflit
+
 ```bash
 # git tag ici
 git diff ex1a..ex1b
@@ -52,7 +49,9 @@ git merge bex1
 # git tag -d ici
 ```
 
-Avec conflit :
+ - Avec conflit
+  - Résolution d'un conflit simple en ligne de commande
+
 ```bash
 # git tag ici
 git diff ex2a..ex2b
@@ -63,11 +62,116 @@ git merge bex2
 # git tag -d ici
 ```
 
-===
+%%%
 
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Résoudre un conflit
+
+Lors de la fusion on est avertis qu'il y a eu des conflits :
+```bash
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+État de la copie locale, `git status` :
+
+```bash
+both modified:   src/main/java/fr/insee/bar/controller/AccueilController.java
+```
+
+Le code contient des marqueurs de conlits :
+```java
+@GetMapping("/")
+<<<<<<< HEAD
+@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+=======
+@ResponseStatus(HttpStatus.OK)
+>>>>>>> origin/bex2
+```
+
+Modifier le code pour supprimer les conflits et les marqueurs
+
+Ajouter les fichiers corrigés dans l'index
+
+Commiter une fois que tout est résolu
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Conseils et astuces : avant la fusion
+
+Activer les marqueurs pour voir l'ancêtre commun :
+ - `git config --global merge.conflictstyle diff3`
+
+```java
+@GetMapping("/")
+<<<<<<< HEAD
+@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+||||||| merged common ancestors
+@ResponseStatus(HttpStatus.TEMPORARY_REDIRECT)
+=======
+@ResponseStatus(HttpStatus.OK)
+>>>>>>> origin/bex2
+```
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Conseils et astuces : pendant la fusion
+
+Lister les *commits* concernés par le conflit :
+ - `git log --oneline --left-right --merge`
+
+```bash
+< 5b9d46d (HEAD -> master, tag: ex2b) Redirection temporaire vers permanente
+> de1d14b (origin/bex2) Redirection vers OK
+```
+
+Voir les parties du code contenant des conflits : 
+- `git diff` pendant la fusion
+
+```patch
+@@@ -16,7 -16,7 +16,13 @@@ public class AccueilController
+        private String name;
+
+        @GetMapping("/")
+++<<<<<<< HEAD
+ +      @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+++||||||| merged common ancestors
+++      @ResponseStatus(HttpStatus.TEMPORARY_REDIRECT)
+++=======
++       @ResponseStatus(HttpStatus.OK)
+++>>>>>>> origin/bex2
+        public String welcome() {
+                return "redirect:/accueil";
+        }
+```
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Conseils et astuces : après la résolution des conflits
+
+Avant *commit*
+ - `git diff` ne doit plus rien afficher
+
+Après *commit*
+ - `git log --cc -p -1` permet d'afficher le patch de la résolution 
+
+```patch
+        @GetMapping("/")
+-       @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+ -      @ResponseStatus(HttpStatus.OK)
+++      @ResponseStatus(HttpStatus.TEMPORARY_REDIRECT)
+        public String welcome() {
+                return "redirect:/accueil";
+        }
+
+```
+
+%%%
 
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Une image
 <div class="center">
-    <img src="git-logo.png" class="boxed-img" />
+    <img src="images/git-logo.png" class="boxed-img" />
 </div>
