@@ -25,61 +25,61 @@ import fr.insee.bar.search.Search;
 @Repository
 public class CocktailDao {
 
-    @Autowired
-    private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
 
-    @Autowired
-    private CocktailRowMapper rowMapper;
+	@Autowired
+	private CocktailRowMapper rowMapper;
 
-    private NamedParameterJdbcTemplate template;
+	private NamedParameterJdbcTemplate template;
 
-    private static final String SQL_FIND = "select * from cocktails where id = :id";
-    private static final String SQL_FIND_BY_NAME = "select * from cocktails where norm like :q";
-    private static final String SQL_FIND_ALL = "select * from cocktails";
+	private static final String SQL_FIND = "select * from cocktails where id = :id";
+	private static final String SQL_FIND_BY_NAME = "select * from cocktails where norm like :q";
+	private static final String SQL_FIND_ALL = "select * from cocktails";
 
-    @PostConstruct
-    private void postConstruct() {
-        this.template = new NamedParameterJdbcTemplate(dataSource);
-    }
+	@PostConstruct
+	private void postConstruct() {
+		this.template = new NamedParameterJdbcTemplate(dataSource);
+	}
 
-    public Optional<Cocktail> find(Short id) {
-        try {
-            Cocktail cocktail = template.queryForObject(SQL_FIND, ImmutableMap.of("id", id), rowMapper);
-            return Optional.of(cocktail);
+	public Optional<Cocktail> find(Short id) {
+		try {
+			Cocktail cocktail = template.queryForObject(SQL_FIND, ImmutableMap.of("id", id), rowMapper);
+			return Optional.of(cocktail);
 
-        }
-        catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
-    }
+		}
+		catch (EmptyResultDataAccessException e) {
+			return Optional.empty();
+		}
+	}
 
-    public Cocktail fill(Cocktail cocktail) {
-        return template.queryForObject(SQL_FIND, ImmutableMap.of("id", cocktail.getId()), rowMapper);
-    }
+	public Cocktail fill(Cocktail cocktail) {
+		return template.queryForObject(SQL_FIND, ImmutableMap.of("id", cocktail.getId()), rowMapper);
+	}
 
-    public List<Cocktail> search(String search) {
-        if (StringUtils.isBlank(search)) {
-            return Lists.newArrayList();
-        }
-        String q = "%" + Search.normalize(search) + "%";
-        return template.query(SQL_FIND_BY_NAME, ImmutableMap.of("q", q), rowMapper);
-    }
+	public List<Cocktail> search(String search) {
+		if (StringUtils.isBlank(search)) {
+			return Lists.newArrayList();
+		}
+		String q = "%" + Search.normalize(search) + "%";
+		return template.query(SQL_FIND_BY_NAME, ImmutableMap.of("q", q), rowMapper);
+	}
 
-    public List<Cocktail> findAll() {
-        return template.query(SQL_FIND_ALL, rowMapper);
-    }
+	public List<Cocktail> findAll() {
+		return template.query(SQL_FIND_ALL, rowMapper);
+	}
 
-    @Component
-    public class CocktailRowMapper implements RowMapper<Cocktail> {
+	@Component
+	public class CocktailRowMapper implements RowMapper<Cocktail> {
 
-        @Override
-        public Cocktail mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Cocktail cocktail = new Cocktail();
-            cocktail.setId(rs.getShort("id"));
-            cocktail.setNom(rs.getString("nom"));
-            cocktail.setPrix(rs.getDouble("prix"));
-            return cocktail;
-        }
+		@Override
+		public Cocktail mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Cocktail cocktail = new Cocktail();
+			cocktail.setId(rs.getShort("id"));
+			cocktail.setNom(rs.getString("nom"));
+			cocktail.setPrix(rs.getDouble("prix"));
+			return cocktail;
+		}
 
-    }
+	}
 }

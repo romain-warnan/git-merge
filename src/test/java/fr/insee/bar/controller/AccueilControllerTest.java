@@ -25,33 +25,33 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 public class AccueilControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @Before
-    public void before() {
-        this.mockMvc = MockMvcBuilders
-            .webAppContextSetup(this.webApplicationContext)
-            .build();
-    }
+	@Before
+	public void before() {
+		this.mockMvc = MockMvcBuilders
+			.webAppContextSetup(this.webApplicationContext)
+			.build();
+	}
 
-    @Test
-    public void welcome() throws Exception {
-        mockMvc
-            .perform(get("/"))
-            .andExpect(status().is(HttpStatus.MOVED_PERMANENTLY.value()))
-            .andExpect(model().attributeDoesNotExist("message"));
-    }
+	@Test
+	public void welcome() throws Exception {
+		mockMvc
+			.perform(get("/"))
+			.andExpect(status().is(HttpStatus.MOVED_PERMANENTLY.value()))
+			.andExpect(model().attributeDoesNotExist("message"));
+	}
 
-    @Test
-    public void hello() throws Exception {
-        mockMvc
-            .perform(get("/accueil"))
-            .andExpect(status().isOk())
-            .andExpect(model().attributeExists("message"))
-            .andExpect(view().name("accueil"))
-            .andExpect(forwardedUrl("/WEB-INF/views/accueil.jsp"));
-    }
+	@Test
+	public void hello() throws Exception {
+		mockMvc
+			.perform(get("/accueil"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("message"))
+			.andExpect(view().name("accueil"))
+			.andExpect(forwardedUrl("/WEB-INF/views/accueil.jsp"));
+	}
 }

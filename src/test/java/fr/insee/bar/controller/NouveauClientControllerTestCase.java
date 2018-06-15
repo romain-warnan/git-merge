@@ -27,62 +27,62 @@ import fr.insee.bar.validator.ClientValidator;
 
 public class NouveauClientControllerTestCase {
 
-    @Mock
-    private ClientDao clientDao;
+	@Mock
+	private ClientDao clientDao;
 
-    @Mock
-    private ClientValidator clientValidator;
+	@Mock
+	private ClientValidator clientValidator;
 
-    @Mock
-    private EmployeService employeService;
+	@Mock
+	private EmployeService employeService;
 
-    @InjectMocks
-    private NouveauClientController nouveauClientController;
+	@InjectMocks
+	private NouveauClientController nouveauClientController;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders
-            .standaloneSetup(nouveauClientController)
-            .build();
-    }
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		this.mockMvc = MockMvcBuilders
+			.standaloneSetup(nouveauClientController)
+			.build();
+	}
 
-    @Test
-    public void nouveauClientPostSuccess() throws Exception {
-        doNothing()
-            .when(clientValidator)
-            .validate(any(Client.class), any(Errors.class));
-        when(clientDao.insert(any(Client.class)))
-            .thenReturn(null);
-        this.mockMvc
-            .perform(post("/client/nouveau")
-                .param("nom", "Pr�nom Nom")
-                .param("email", "prenom.nom@gmail.com")
-                .param("dateNaissance", "21/04/1984"))
-            .andExpect(status().isFound())
-            .andExpect(model().attributeDoesNotExist("client"))
-            .andExpect(model().hasNoErrors())
-            .andExpect(redirectedUrl("/clients"))
-            .andExpect(flash().attributeExists("nouveauClient"));
-    }
+	@Test
+	public void nouveauClientPostSuccess() throws Exception {
+		doNothing()
+			.when(clientValidator)
+			.validate(any(Client.class), any(Errors.class));
+		when(clientDao.insert(any(Client.class)))
+			.thenReturn(null);
+		this.mockMvc
+			.perform(post("/client/nouveau")
+				.param("nom", "Pr�nom Nom")
+				.param("email", "prenom.nom@gmail.com")
+				.param("dateNaissance", "21/04/1984"))
+			.andExpect(status().isFound())
+			.andExpect(model().attributeDoesNotExist("client"))
+			.andExpect(model().hasNoErrors())
+			.andExpect(redirectedUrl("/clients"))
+			.andExpect(flash().attributeExists("nouveauClient"));
+	}
 
-    @Test
-    public void nouveauClientPostError() throws Exception {
-        doNothing()
-            .when(clientValidator)
-            .validate(any(Client.class), any(Errors.class));
-        when(clientDao.insert(any(Client.class)))
-            .thenReturn(null);
-        this.mockMvc
-            .perform(post("/client/nouveau")
-                .param("nom", "Pr�nom Nom")
-                .param("email", "")
-                .param("dateNaissance", "21/04/1984"))
-            .andExpect(status().isOk())
-            .andExpect(model().attributeExists("client"))
-            .andExpect(model().errorCount(1))
-            .andExpect(view().name("nouveau-client"));
-    }
+	@Test
+	public void nouveauClientPostError() throws Exception {
+		doNothing()
+			.when(clientValidator)
+			.validate(any(Client.class), any(Errors.class));
+		when(clientDao.insert(any(Client.class)))
+			.thenReturn(null);
+		this.mockMvc
+			.perform(post("/client/nouveau")
+				.param("nom", "Pr�nom Nom")
+				.param("email", "")
+				.param("dateNaissance", "21/04/1984"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("client"))
+			.andExpect(model().errorCount(1))
+			.andExpect(view().name("nouveau-client"));
+	}
 }

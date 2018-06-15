@@ -20,25 +20,25 @@ import fr.insee.bar.service.CocktailService;
 @RequestMapping("/cocktails")
 public class CocktailsController {
 
-    @Autowired
-    private CocktailDao cocktailDao;
+	@Autowired
+	private CocktailDao cocktailDao;
 
-    @Autowired
-    private CocktailService cocktailService;
+	@Autowired
+	private CocktailService cocktailService;
 
-    @GetMapping("/recherche")
-    @ResponseBody
-    public List<Cocktail> recherche(@RequestParam("q") String q) {
-        return cocktailDao.search(q);
-    }
+	@GetMapping("/recherche")
+	@ResponseBody
+	public List<Cocktail> recherche(@RequestParam("q") String q) {
+		return cocktailDao.search(q);
+	}
 
-    @PostMapping("/commande")
-    @ResponseBody
-    public Double commande(@RequestBody List<Cocktail> cocktails) throws BarCommandeException {
-        cocktailService.verifierCommandeValide(cocktails);
-        return cocktails.stream()
-            .map(cocktailDao::fill)
-            .mapToDouble(Cocktail::getPrix)
-            .sum();
-    }
+	@PostMapping("/commande")
+	@ResponseBody
+	public Double commande(@RequestBody List<Cocktail> cocktails) throws BarCommandeException {
+		cocktailService.verifierCommandeValide(cocktails);
+		return cocktails.stream()
+			.map(cocktailDao::fill)
+			.mapToDouble(Cocktail::getPrix)
+			.sum();
+	}
 }

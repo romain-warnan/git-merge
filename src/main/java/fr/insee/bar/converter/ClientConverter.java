@@ -12,12 +12,12 @@ import fr.insee.bar.model.Client;
 @Component
 public class ClientConverter implements Converter<String, Client> {
 
-    @Autowired
-    private ClientDao clientDao;
+	@Autowired
+	private ClientDao clientDao;
 
-    @Override
-    public Client convert(String id) {
-        Optional<Client> client = clientDao.find(Short.valueOf(id));
-        return client.orElse(Client.EMPTY);
-    }
+	@Override
+	public Client convert(String id) {
+		Optional<Client> client = clientDao.find(Short.valueOf(id));
+		return client.orElse(Client.EMPTY);
+	}
 }

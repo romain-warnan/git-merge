@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @PropertySource("classpath:application.properties")
 public class AccueilController {
 
-    @Value("${name}")
-    private String name;
+	@Value("${name}")
+	private String name;
 
-    @GetMapping("/")
-    @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
-    public String welcome() {
-        return "redirect:/accueil";
-    }
+	@GetMapping("/")
+	@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+	public String welcome() {
+		return "redirect:/accueil";
+	}
 
-    @GetMapping("/accueil")
-    public String hello(Model model) {
-        model.addAttribute("message", name);
-        return "accueil";
-    }
+	@GetMapping("/accueil")
+	public String hello(Model model) {
+		model.addAttribute("message", name);
+		return "accueil";
+	}
 }
