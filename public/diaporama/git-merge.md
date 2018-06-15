@@ -236,3 +236,45 @@ Solution :
  - on annule la fusion : `git merge --abort`
  - on refait la fusion en ignorant les espaces : `git merge -Xignore-space-change bex4`
  - la fusion est automatique
+ 
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Choisir une version
+
+Résoudre un conflit en utilisant l'une ou l'autre version
+
+ - Globalement :
+
+```bash
+git merge <branche> # conflits
+git merge --abort
+
+git merge -Xours <branche> # garder notre version pour toutes les lignes en conflit
+
+git merge -Xtheirs <branche> # garder leurs version pour toutes les lignes en conflit
+``` 
+
+ - Au cas par cas :
+
+```bash
+git merge <branche> # conflits
+
+# garder notre version pour les lignes en conflit dans ce fichier :
+git checkout --ours fichier_en_conflit.txt
+
+# garder leurs version pour les lignes en conflit dans ce fichier :
+git checkout --theirs autre_fichier_en_conflit.txt
+
+git add .
+git commit
+```
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Annuler une fusion
+
+ 1. pas encore partagée
+ 
+ 2. déjà partagée 
