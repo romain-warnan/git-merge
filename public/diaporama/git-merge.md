@@ -276,12 +276,8 @@ git commit
 ### Annuler une fusion
 
 Pas encore partagée
- - le résultat de la fusion n’a pas encore été *push*
- - il suffit de revenir au commit précédent la fusion
-
-```bash
-git reset --hard HEAD~
-```
+ - le résultat de la fusion n’a pas encore été envoyé vers le dépôt distant
+ - il suffit de revenir au commit précédent la fusion : `git reset --hard HEAD~`
 
 Déjà partagée
  - le résultat de la fusion a déjà été envoyé vers le dépôt distant
@@ -296,3 +292,18 @@ git revert --mainline 1 HEAD
 <div class="center">
     <img src="images/undomerge-revert.png" class="boxed-img" width="500px" />
 </div>
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Mieux vaut éviter les conflits que les résoudre
+
+*Commiter* souvent 
+ - des petits lots de modifications homogènes
+  
+Avoir des petits fichiers
+ - bien découper les classes selon leur responsabilités
+  
+Communiquer avec les autres membres de l’équipe
+ - dire sur quoi on travaille
+ - bien prévenir en cas du *refactoring* important
