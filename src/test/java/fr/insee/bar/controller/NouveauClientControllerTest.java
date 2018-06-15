@@ -26,51 +26,51 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 public class NouveauClientControllerTest {
 
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void before() {
-		this.mockMvc = MockMvcBuilders
-			.webAppContextSetup(this.webApplicationContext)
-			.build();
-	}
+    @Before
+    public void before() {
+        this.mockMvc = MockMvcBuilders
+            .webAppContextSetup(this.webApplicationContext)
+            .build();
+    }
 
-	@Test
-	public void nouveauClientServeur() throws Exception {
-		this.mockMvc
-			.perform(get("/client/nouveau"))
-			.andExpect(model().attributeDoesNotExist("client"))
-			.andExpect(status().isForbidden())
-			.andExpect(view().name("exception"));
-	}
+    @Test
+    public void nouveauClientServeur() throws Exception {
+        this.mockMvc
+            .perform(get("/client/nouveau"))
+            .andExpect(model().attributeDoesNotExist("client"))
+            .andExpect(status().isForbidden())
+            .andExpect(view().name("exception"));
+    }
 
-	@Test
-	public void nouveauClientPostSuccess() throws Exception {
-		this.mockMvc
-			.perform(post("/client/nouveau")
-				.param("nom", "Pr�nom Nom")
-				.param("email", "prenom.nom@gmail.com")
-				.param("dateNaissance", "21/04/1984"))
-			.andExpect(status().isFound())
-			.andExpect(model().attributeDoesNotExist("client"))
-			.andExpect(model().hasNoErrors())
-			.andExpect(redirectedUrl("/clients"))
-			.andExpect(flash().attributeExists("nouveauClient"));
-	}
+    @Test
+    public void nouveauClientPostSuccess() throws Exception {
+        this.mockMvc
+            .perform(post("/client/nouveau")
+                .param("nom", "Pr�nom Nom")
+                .param("email", "prenom.nom@gmail.com")
+                .param("dateNaissance", "21/04/1984"))
+            .andExpect(status().isFound())
+            .andExpect(model().attributeDoesNotExist("client"))
+            .andExpect(model().hasNoErrors())
+            .andExpect(redirectedUrl("/clients"))
+            .andExpect(flash().attributeExists("nouveauClient"));
+    }
 
-	@Test
-	public void nouveauClientPostError() throws Exception {
-		this.mockMvc
-			.perform(post("/client/nouveau")
-				.param("nom", "Pr�nom Nom")
-				.param("email", "")
-				.param("dateNaissance", "21/04/1984"))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("client"))
-			.andExpect(model().errorCount(1))
-			.andExpect(view().name("nouveau-client"));
-	}
+    @Test
+    public void nouveauClientPostError() throws Exception {
+        this.mockMvc
+            .perform(post("/client/nouveau")
+                .param("nom", "Pr�nom Nom")
+                .param("email", "")
+                .param("dateNaissance", "21/04/1984"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("client"))
+            .andExpect(model().errorCount(1))
+            .andExpect(view().name("nouveau-client"));
+    }
 }

@@ -13,13 +13,13 @@ import fr.insee.bar.model.Client;
 @Controller
 public class ClientsController {
 
-	@Autowired
-	private ClientDao clientDao;
+    @Autowired
+    private ClientDao clientDao;
 
-	@GetMapping("/clients")
-	public String clients(Model model) {
-		List<Client> clients = clientDao.findAll();
-		model.addAttribute("clients", clients);
-		return "clients";
-	}
+    @GetMapping("/clients")
+    public String clients(Model model) {
+        List<Client> clients = clientDao.findAll();
+        model.addAttribute("clients", clients);
+        return "clients";
+    }
 }
