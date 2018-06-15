@@ -11,16 +11,16 @@ import fr.insee.bar.model.Agent;
 @Component
 public class ServeurProvider implements EmployeProvider {
 
-	@Autowired
-	private EmployeDao employeDao;
+    @Autowired
+    private EmployeDao employeDao;
 
 
-	/**
-	 * Retourne un agent dont le rôle est "serveur"
-	 * */
-	@Override
-	public Agent provide() {
-		return employeDao.find(Short.valueOf("2")).get();
-	}
+    /**
+     * Retourne un agent dont le rôle est "serveur"
+     * */
+    @Override
+    public Agent provide() {
+        return employeDao.find(Short.valueOf("2")).get();
+    }
 
 }

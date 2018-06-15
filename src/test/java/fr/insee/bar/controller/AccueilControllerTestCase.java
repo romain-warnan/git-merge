@@ -19,35 +19,35 @@ import fr.insee.bar.controller.AccueilController;
 
 public class AccueilControllerTestCase {
 
-	@InjectMocks
-	private AccueilController accueilController;
+    @InjectMocks
+    private AccueilController accueilController;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		MockitoAnnotations.initMocks(this);
-		Whitebox.setInternalState(accueilController, "name", "Spring MVC");
-		this.mockMvc = MockMvcBuilders
-			.standaloneSetup(accueilController)
-			.setViewResolvers(new InternalResourceViewResolver("/WEB-INF/views", "jsp"))
-			.build();
-	}
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        Whitebox.setInternalState(accueilController, "name", "Spring MVC");
+        this.mockMvc = MockMvcBuilders
+            .standaloneSetup(accueilController)
+            .setViewResolvers(new InternalResourceViewResolver("/WEB-INF/views", "jsp"))
+            .build();
+    }
 
-	@Test
-	public void welcome() throws Exception {
-		mockMvc
-			.perform(get("/"))
-			.andExpect(status().is(HttpStatus.MOVED_PERMANENTLY.value()))
-			.andExpect(model().attributeDoesNotExist("message"));
-	}
+    @Test
+    public void welcome() throws Exception {
+        mockMvc
+            .perform(get("/"))
+            .andExpect(status().is(HttpStatus.MOVED_PERMANENTLY.value()))
+            .andExpect(model().attributeDoesNotExist("message"));
+    }
 
-	@Test
-	public void hello() throws Exception {
-		mockMvc
-			.perform(get("/accueil"))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("message"))
-			.andExpect(view().name("accueil"));
-	}
+    @Test
+    public void hello() throws Exception {
+        mockMvc
+            .perform(get("/accueil"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("message"))
+            .andExpect(view().name("accueil"));
+    }
 }

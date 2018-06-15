@@ -11,9 +11,9 @@ import fr.insee.bar.model.Agent;
 @RequestMapping("/commande")
 public class CommandeController {
 
-	@GetMapping
-	public String commande(Agent agent, Model model) {
-		model.addAttribute("employe", agent);
-		return "commande";
-	}
+    @GetMapping
+    public String commande(Agent agent, Model model) {
+        model.addAttribute("employe", agent);
+        return "commande";
+    }
 }

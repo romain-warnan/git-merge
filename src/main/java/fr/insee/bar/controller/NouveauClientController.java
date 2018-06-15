@@ -22,35 +22,35 @@ import fr.insee.bar.validator.ClientValidator;
 @RequestMapping("/client")
 public class NouveauClientController {
 
-	@Autowired
-	private ClientDao clientDao;
+    @Autowired
+    private ClientDao clientDao;
 
-	@Autowired
-	private ClientValidator clientValidator;
+    @Autowired
+    private ClientValidator clientValidator;
 
-	@Autowired
-	private EmployeService employeService;
+    @Autowired
+    private EmployeService employeService;
 
-	@GetMapping("/nouveau")
-	public String nouveauClient(Agent agent, Model model) throws BarDroitException {
-		employeService.verifierResponsable(agent);
-		model.addAttribute("client", new Client());
-		return "nouveau-client";
-	}
+    @GetMapping("/nouveau")
+    public String nouveauClient(Agent agent, Model model) throws BarDroitException {
+        employeService.verifierResponsable(agent);
+        model.addAttribute("client", new Client());
+        return "nouveau-client";
+    }
 
-	@PostMapping("/nouveau")
-	public String nouveauClientPost(
-		@Valid Client client,
-		BindingResult result,
-		Model model,
-		RedirectAttributes redirectAttributes) {
-		clientValidator.validate(client, result);
-		if (result.hasErrors()) {
-			model.addAttribute("client", client);
-			return "nouveau-client";
-		}
-		clientDao.insert(client);
-		redirectAttributes.addFlashAttribute("nouveauClient", client);
-		return "redirect:/clients";
-	}
+    @PostMapping("/nouveau")
+    public String nouveauClientPost(
+        @Valid Client client,
+        BindingResult result,
+        Model model,
+        RedirectAttributes redirectAttributes) {
+        clientValidator.validate(client, result);
+        if (result.hasErrors()) {
+            model.addAttribute("client", client);
+            return "nouveau-client";
+        }
+        clientDao.insert(client);
+        redirectAttributes.addFlashAttribute("nouveauClient", client);
+        return "redirect:/clients";
+    }
 }

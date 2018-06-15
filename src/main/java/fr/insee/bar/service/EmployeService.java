@@ -11,19 +11,19 @@ import fr.insee.bar.model.Role;
 @Service
 public class EmployeService {
 
-	private static final Short RESPONSABLE = Short.valueOf("2");
+    private static final Short RESPONSABLE = Short.valueOf("2");
 
-	public boolean estResponsable(Agent agent) {
-		Role role = agent.getRole();
-		if (role == null) {
-			return false;
-		}
-		return Objects.equal(role.getId(), RESPONSABLE);
-	}
+    public boolean estResponsable(Agent agent) {
+        Role role = agent.getRole();
+        if (role == null) {
+            return false;
+        }
+        return Objects.equal(role.getId(), RESPONSABLE);
+    }
 
-	public void verifierResponsable(Agent agent) throws BarDroitException {
-		if (!this.estResponsable(agent)) {
-			throw new BarDroitException(agent);
-		}
-	}
+    public void verifierResponsable(Agent agent) throws BarDroitException {
+        if (!this.estResponsable(agent)) {
+            throw new BarDroitException(agent);
+        }
+    }
 }

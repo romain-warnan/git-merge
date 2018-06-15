@@ -5,54 +5,54 @@ import com.google.common.base.Objects;
 
 public class Agent {
 
-	private Short id;
-	private String nom;
-	private Role role;
+    private Short id;
+    private String nom;
+    private Role role;
 
-	public Short getId() {
-		return id;
-	} 
+    public Short getId() {
+        return id;
+    } 
 
-	public void setId(Short id) {
-		this.id = id;
-	}
+    public void setId(Short id) {
+        this.id = id;
+    }
 
-	public String getNom() {
-		return nom;
-	}
+    public String getNom() {
+        return nom;
+    }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(this.id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.id);
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		if (object == null || !(object instanceof Agent)) {
-			return false;
-		}
-		Agent other = (Agent) object;
-		return Objects.equal(this.id, other.id);
-	}
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof Agent)) {
+            return false;
+        }
+        Agent other = (Agent) object;
+        return Objects.equal(this.id, other.id);
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.add("id", id)
-			.add("nom", nom)
-			.add("role", role)
-			.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("id", id)
+            .add("nom", nom)
+            .add("role", role)
+            .toString();
+    }
 }

@@ -35,35 +35,35 @@ public class ChargementClientsController {
 
     @GetMapping("/chargement")
     public String chargement(Agent agent) throws BarDroitException {
-	employeService.verifierResponsable(agent);
-	return "chargement-clients";
+    employeService.verifierResponsable(agent);
+    return "chargement-clients";
     }
 
     @PostMapping("/chargement")
     public String chargementPost(MultipartFile file, RedirectAttributes redirectAttributes) {
-	long n = clientService.chargement(file);
-	redirectAttributes.addFlashAttribute("message", String.format(
-		"%d clients ont été ajoutés avec succès à partir du fichier %s", n, file.getOriginalFilename()));
-	return "redirect:/clients";
+    long n = clientService.chargement(file);
+    redirectAttributes.addFlashAttribute("message", String.format(
+        "%d clients ont été ajoutés avec succès à partir du fichier %s", n, file.getOriginalFilename()));
+    return "redirect:/clients";
     }
 
     @GetMapping(value = "/telechargement", params = "!type")
     public ResponseEntity<FileSystemResource> telechargement() {
-	File file = clientService.fichier();
-	return ResponseEntity.ok().contentLength(file.length()).contentType(MediaType.APPLICATION_OCTET_STREAM)
-		.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
-		.body(new FileSystemResource(file));
+    File file = clientService.fichier();
+    return ResponseEntity.ok().contentLength(file.length()).contentType(MediaType.APPLICATION_OCTET_STREAM)
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
+        .body(new FileSystemResource(file));
     }
 
     @GetMapping(value = "/telechargement", params = "type=pdf")
     public View telechargementPdf(Model model) {
-	model.addAttribute("clients", clientService.clients());
-	return new ClientsPdfView();
+    model.addAttribute("clients", clientService.clients());
+    return new ClientsPdfView();
     }
 
     @GetMapping(value = "/telechargement", params = "type=xls")
     public View telechargementExcel(Model model) {
-	model.addAttribute("clients", clientService.clients());
-	return new ClientsExcelView();
+    model.addAttribute("clients", clientService.clients());
+    return new ClientsExcelView();
     }
 }
