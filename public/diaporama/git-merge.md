@@ -275,6 +275,24 @@ git commit
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Annuler une fusion
 
- 1. pas encore partagée
- 
- 2. déjà partagée 
+Pas encore partagée
+ - le résultat de la fusion n'a pas encore été *push*
+ - il suffit de revenir au commit précédent la fusion
+
+```bash
+git reset --hard HEAD~
+```
+
+Déjà partagée
+ - le résultat de la fusion a déjà été envoyé vers le dépôt distant
+ - on ne peut pas réécrire l'historique
+ - on va donc faire un `git revert`
+  - &rarr; *revert* : annuler un *commit* en appliquant le *patch* inverse
+
+```bash
+git revert --mainline 1 HEAD
+```
+
+<div class="center">
+    <img src="images/undomerge-revert.png" class="boxed-img" width="500px" />
+</div>
