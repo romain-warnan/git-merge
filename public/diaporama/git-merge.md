@@ -175,7 +175,7 @@ Après *commit*
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Exemple complet
 
-Explications :
+Problème :
  - dans une branche `bex3`, on a renommé une classe du modèle
   - `Employe` &rarr; `Agent`
   - beaucoup de fichiers sont donc modifiés
@@ -186,7 +186,7 @@ Explications :
   - `Personne` &rarr; `Client`
  
 <div class="center">
-    <img src="images/graph.png" class="boxed-img" />
+    <img src="images/graph-1.png" class="boxed-img" />
 </div>
 
 On veut fusionner `bex3` dans `master`
@@ -194,17 +194,45 @@ On veut fusionner `bex3` dans `master`
 %%%
 
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
-### Étapes
+### Étapes de la résolution des conflits
 
 ```bash
 git reset --hard ex3b
 ```
 
+Solution :
  - on fait la fusion dans Eclipse
- - `git diff`
+ - on localise les conflits : `git diff`
  - on résoud le problème de la classe supprimée
  - on résoud les conflits dans les deux contrôleurs
- - `git log --oneline --left-right --merge`
+ - on identifie les *commits* concernés : `git log --oneline --left-right --merge`
  - on lance l'application
- - *commit*
- - `git log --cc -p -1`
+ - on valide le résultat : `git commit`
+ - on vérifie nos modifications : `git log --cc -p -1`
+
+%%%
+
+<!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
+### Ignorer les espaces
+
+Problème :
+ - dans une branche `bex4`, on a fait une petite correction
+ - mais par inadvertance toutes les tabulations ont été remplacées par des espaces
+  - `Tab` &rarr; `Espaces` 
+ - dans `master`, on renommé une classe du modèle
+  - `Agent` &rarr; `Employe`
+
+<div class="center">
+    <img src="images/graph-2.png" class="boxed-img" />
+</div>
+
+```bash
+git reset --hard ex4b
+```
+
+Solution :
+ - on fait la fusion : `git merge bex4`
+ - il y a beaucoup de conflits
+ - on annule la fusion : `git merge --abort`
+ - on refait la fusion en ignorant les espaces : `git merge -Xignore-space-change bex4`
+ - la fusion est automatique
