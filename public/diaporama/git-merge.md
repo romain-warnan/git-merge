@@ -302,7 +302,7 @@ git revert --mainline 1 HEAD
  - des petits lots de modifications homogènes
   
 Avoir des petits fichiers
- - bien découper les classes selon leur responsabilités
+ - bien découper les classes selon leurs responsabilités
   
 Communiquer avec les autres membres de l’équipe
  - dire sur quoi on travaille
