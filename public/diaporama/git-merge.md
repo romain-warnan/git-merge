@@ -307,3 +307,6 @@ Avoir des petits fichiers
 Communiquer avec les autres membres de l’équipe
  - dire sur quoi on travaille
  - bien prévenir en cas du *refactoring* important
+
+Mettre à jour sa copie locale régulièrement
+ - *pull* ou *rebase* 
