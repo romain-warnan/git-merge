@@ -1,4 +1,4 @@
-# Maitriser les fusions avec Git
+# Maîtriser les fusions avec Git
 
 ## En utilisant Eclipse et la ligne de commande
 
