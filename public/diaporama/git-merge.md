@@ -283,7 +283,7 @@ Déjà partagée
  - le résultat de la fusion a déjà été envoyé vers le dépôt distant
  - on ne peut pas réécrire l’historique
  - on va donc faire un `git revert`
-  - &rarr; *revert* : annuler un *commit* en appliquant le *patch* inverse
+  - &rarr; *revert* = annuler un *commit* en appliquant le *patch* inverse
 
 ```bash
 git revert --mainline 1 HEAD
