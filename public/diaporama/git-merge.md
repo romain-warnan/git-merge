@@ -2,11 +2,11 @@
 ### Quelques précisions : *merge*, *rebase* et *pull*
 
 Les fusions se produisent dans trois cas :
- - intégration d'une branche
+ - intégration d’une branche
   - `git merge <branche_name>`
  - récupération des modifications distantes
   - `git pull`
- - réécriture de l'historique local
+ - réécriture de l’historique local
   - `git rebase master`
 
 Les techniques présentées ici sont valables dans les trois cas
@@ -22,11 +22,11 @@ Les techniques présentées ici sont valables dans les trois cas
 La fusion est toujours locale
  - aucun risque de casser quoique ce soit
 
-On peut toujours annuler l'opération
+On peut toujours annuler l’opération
  - `git merge --abort`
  - `git rebase --abort`
 
-Il est toujours préférable d'avoir une copie de travail propre
+Il est toujours préférable d’avoir une copie de travail propre
  - valider : `git commit`
  - ou remiser : `git stash`
 
@@ -50,7 +50,7 @@ git merge bex1
 ```
 
  - Avec conflit
-  - Résolution d'un conflit simple en ligne de commande
+  - Résolution d’un conflit simple en ligne de commande
 
 ```bash
 # git tag ici
@@ -67,7 +67,7 @@ git merge bex2
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Résoudre un conflit
 
-Lors de la fusion on est avertis qu'il y a eu des conflits :
+Lors de la fusion on est avertis qu’il y a eu des conflits :
 ```bash
 Automatic merge failed; fix conflicts and then commit the result.
 ```
@@ -90,7 +90,7 @@ Le code contient des marqueurs de conlits :
 
 Modifier le code pour supprimer les conflits et les marqueurs
 
-Ajouter les fichiers corrigés dans l'index
+Ajouter les fichiers corrigés dans l’index
 
 Commiter une fois que tout est résolu
 
@@ -99,7 +99,7 @@ Commiter une fois que tout est résolu
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Conseils et astuces : avant la fusion
 
-Activer les marqueurs pour voir l'ancêtre commun :
+Activer les marqueurs pour voir l’ancêtre commun :
  - `git config --global merge.conflictstyle diff3`
 
 ```java
@@ -153,11 +153,11 @@ Voir les parties du code contenant des conflits :
 
 Avant *commit*
  - `git diff` ne doit plus rien afficher
- - compiler et lancer l'application
+ - compiler et lancer l’application
  - exécuter les tests
 
 Après *commit*
- - `git log --cc -p -1` permet d'afficher le patch de la résolution 
+ - `git log --cc -p -1` permet d’afficher le patch de la résolution 
 
 ```patch
         @GetMapping("/")
@@ -206,7 +206,7 @@ Solution :
  - on résoud le problème de la classe supprimée
  - on résoud les conflits dans les deux contrôleurs
  - on identifie les *commits* concernés : `git log --oneline --left-right --merge`
- - on lance l'application
+ - on lance l’application
  - on valide le résultat : `git commit`
  - on vérifie nos modifications : `git log --cc -p -1`
 
@@ -242,7 +242,7 @@ Solution :
 <!-- .slide: data-background-image="images/merge-logo.png" data-background-size="600px" class="slide" -->
 ### Choisir une version
 
-Résoudre un conflit en utilisant l'une ou l'autre version
+Résoudre un conflit en utilisant l’une ou l’autre version
 
  - Globalement :
 
@@ -276,7 +276,7 @@ git commit
 ### Annuler une fusion
 
 Pas encore partagée
- - le résultat de la fusion n'a pas encore été *push*
+ - le résultat de la fusion n’a pas encore été *push*
  - il suffit de revenir au commit précédent la fusion
 
 ```bash
@@ -285,7 +285,7 @@ git reset --hard HEAD~
 
 Déjà partagée
  - le résultat de la fusion a déjà été envoyé vers le dépôt distant
- - on ne peut pas réécrire l'historique
+ - on ne peut pas réécrire l’historique
  - on va donc faire un `git revert`
   - &rarr; *revert* : annuler un *commit* en appliquant le *patch* inverse
 
