@@ -6,6 +6,6 @@ pages:
   - echo 'Deploy to Gitlab pages'
   artifacts:
     paths:
-    - docs
+    - public
   only:
   - master
