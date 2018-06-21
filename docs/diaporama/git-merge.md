@@ -4,13 +4,13 @@
 Les fusions se produisent dans trois cas :
  - intégration d’une branche
   - `git merge <branche_name>`
- - récupération des modifications distantes
-  - `git pull`
+ - récupération de modifications « extérieures »
+  - `pull`, `cherry-pick`, `patch`
  - réécriture de l’historique local
   - `git rebase master`
 
 Les techniques présentées ici sont valables dans les trois cas
- - `git pull` =
+ - Rappel : `git pull` =
   - `git fetch`
   - `git merge origin/master` 
 
